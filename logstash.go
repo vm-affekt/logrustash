@@ -119,6 +119,8 @@ func NewHookWithFieldsAndConnAndPrefix(conn net.Conn, appName string, alwaysSent
 // Logs will be sent asynchronously.
 func NewAsyncHookWithFieldsAndConnAndPrefix(conn net.Conn, appName string, alwaysSentFields logrus.Fields, prefix string) (*Hook, error) {
 	hook := &Hook{conn: conn, appName: appName, alwaysSentFields: alwaysSentFields, hookOnlyPrefix: prefix}
+	hook.AsyncBufferSize = defaultAsyncBufferSize
+
 	hook.makeAsync()
 
 	return hook, nil
